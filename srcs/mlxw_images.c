@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlxw.h                                             :+:      :+:    :+:   */
+/*   mlxw_images.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/12 01:33:26 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/12 01:38:39 by tdelage          ###   ########.fr       */
+/*   Created: 2023/11/12 02:41:30 by tdelage           #+#    #+#             */
+/*   Updated: 2023/11/12 09:17:43 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MLXW_H
-# define MLXW_H
+#include <mlxw_images.h>
 
-# include "mlx.h"
-# include "mlx_int.h"
-# include "mlxw_colors.h"
-# include "mlxw_hooks.h"
-# include "mlxw_images.h"
-
-#endif // MLXWH_H
+void	mlxw_print_img(struct s_mlx mlx, struct s_image img)
+{
+	mlx_put_image_to_window(mlx.ctx, mlx.window, img.ctx.data, img.x, img.y);
+}

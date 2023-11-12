@@ -6,35 +6,63 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 05:13:41 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/11 06:19:44 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/12 13:54:21 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <mlx.c>
-#include "../include/mlx.h"
-#include "../include/mlxw.h"
+#include "../include/so_long.h"
 
-void	my_mlx_pixel_put(struct s_image *data, int x, int y, int color)
+int	w_cl(struct s_mlx *mlx)
 {
-	char	*dst;
-
-	dst = data->address + (y * data->width + x * (data->BPP / 8));
-	*(unsigned int*)dst = color;
+	mlx_loop_end(mlx->ctx);
+	return (1);
 }
 
-int	main(void)
+void	draw(struct s_so_long *game)
 {
-        struct s_mlx mlx;
-        struct s_image img;
+	mlxw_clear(game->mlx);
+        render_map(game);
+	mlxw_print_img(game->mlx, game->player);
+}
 
-        mlxw_create_context(&mlx);
-        mlxw_create_window(&mlx, s_window_create(600, 400, "First window"));
+int	key_pressed(int keycode, struct s_so_long *game)
+{
+	if (keycode == K_UP)
+		game->player.y -= CELL_SIZE;
+	if (keycode == K_DOWN)
+		game->player.y += CELL_SIZE;
+	if (keycode == K_LEFT)
+		game->player.x -= CELL_SIZE;
+	if (keycode == K_RIGHT)
+		game->player.x += CELL_SIZE;
+	draw(game);
+	return (1);
+}
 
-        img.data = mlx_new_image(mlx.ctx, 600, 400);
-        img.address = mlx_get_data_addr(img.data, &img.BPP, &img.width, &img.endian);
+void	so_long_unleak(struct s_so_long game)
+{
+	s_image_destroy(game.mlx, game.bg);
+	s_image_destroy(game.mlx, game.player);
+	mlxw_destroy_window(game.mlx);
+	mlxw_destroy_context(game.mlx);
+}
 
-        my_mlx_pixel_put(&img, 20, 20, 0xFFFFFFFF);
-        mlx_put_image_to_window(mlx.ctx, mlx.window, img.data, 0, 0);
+int	main(int c, char **v)
+{
+	struct s_so_long	game;
 
-	mlx_loop(mlx.ctx);
+        get_args(c, v, &game);
+
+	mlxw_create_context(&game.mlx);
+	mlxw_create_window(&game.mlx, s_window_create(CELL_SIZE * MAP_WIDTH, CELL_SIZE * MAP_HEIGHT,
+			"First window"));
+	game.bg = s_image_create_xpm(game.mlx, "assets/Grass.xpm");
+	game.player = s_image_create_xpm(game.mlx, "assets/Steak.xpm");
+	s_hook_register(game.mlx, s_hook_create(E_DESTROY_NOTIFY, M_NONE, w_cl,
+			&game.mlx));
+	s_hook_register(game.mlx, s_hook_create(E_KEY_PRESSED, M_KEY_PRESSED,
+			key_pressed, &game));
+	draw(&game);
+	mlx_loop(game.mlx.ctx);
+	so_long_unleak(game);
 }

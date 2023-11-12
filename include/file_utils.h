@@ -1,22 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlxw.h                                             :+:      :+:    :+:   */
+/*   file_utils.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/12 01:33:26 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/12 01:38:39 by tdelage          ###   ########.fr       */
+/*   Created: 2023/11/12 11:59:25 by tdelage           #+#    #+#             */
+/*   Updated: 2023/11/12 15:01:08 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MLXW_H
-# define MLXW_H
+#ifndef FILE_UTILS_H
+# define FILE_UTILS_H
 
-# include "mlx.h"
-# include "mlx_int.h"
-# include "mlxw_colors.h"
-# include "mlxw_hooks.h"
-# include "mlxw_images.h"
+# include "libft.h"
+# include <fcntl.h>
+# include <stdlib.h>
+# include <unistd.h>
 
-#endif // MLXWH_H
+# define SLURP_BUF_SIZE 1024
+
+enum	e_error_code
+{
+	FILE_NOT_FOUND = 1,
+	FILE_READ_ERROR = 2,
+	TOO_MUCH_ARGUMENTS = 3,
+	TOO_FEW_ARGUMENTS = 4,
+	MALLOC_ERROR = 5,
+	BAD_MAP_EXTENTION = 6,
+};
+
+char	*slurp(char *path);
+void	handle_error(int code);
+
+#endif // FILE_UTILS_H

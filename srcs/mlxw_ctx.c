@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlxw.h                                             :+:      :+:    :+:   */
+/*   mlxw_ctx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/12 01:33:26 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/12 01:38:39 by tdelage          ###   ########.fr       */
+/*   Created: 2023/11/12 02:41:26 by tdelage           #+#    #+#             */
+/*   Updated: 2023/11/12 09:12:46 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MLXW_H
-# define MLXW_H
+#include <mlxw_ctx.h>
 
-# include "mlx.h"
-# include "mlx_int.h"
-# include "mlxw_colors.h"
-# include "mlxw_hooks.h"
-# include "mlxw_images.h"
+void	mlxw_create_context(struct s_mlx *mlx)
+{
+	mlx->ctx = mlx_init();
+}
 
-#endif // MLXWH_H
+void	mlxw_create_window(struct s_mlx *mlx, struct s_window win)
+{
+	mlx->window = mlx_new_window(mlx->ctx, win.width, win.height, win.title);
+}
+
+void	mlxw_clear(struct s_mlx mlx)
+{
+	mlx_clear_window(mlx.ctx, mlx.window);
+}
