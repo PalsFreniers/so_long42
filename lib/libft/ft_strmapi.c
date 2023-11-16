@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 16:14:03 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/01 18:05:48 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/15 14:21:37 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	if (!f)
 		return (NULL);
 	len = ft_strlen(s);
-	ret = ft_calloc(len + 1, sizeof(char));
+	ret = (char *)ft_calloc(len + 1, sizeof(char));
 	if (!ret)
 		return (NULL);
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 09:56:43 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/14 04:31:32 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/15 21:26:40 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SO_LONG_H
 
 # include "file_utils.h"
+#include "errors.h"
 # include "mlxw.h"
 
 # define CELL_SIZE 64
@@ -29,10 +30,12 @@
 # define FLAG_ENEMY_MOVE 0b00000100
 # define FLAG_PAUSE 0b00001000
 
+
 struct					s_map
 {
 	int					width;
 	int					height;
+        int col_nbr;
 	char				*map;
 };
 
@@ -44,18 +47,24 @@ struct					s_player
 	struct s_img_dat	frames[1];
 };
 
+struct s_exit {
+        struct s_image current;
+        int x;
+        int y;
+        struct s_image frames[2];
+};
+
 struct					s_so_long
 {
 	struct s_mlx		mlx;
 	struct s_map		map;
 	struct s_image		bg;
 	struct s_image		wall;
-	struct s_image		exit;
+	struct s_exit		exit;
 	struct s_image		collectible;
-	struct s_image		nbrs_center[10];
-	struct s_image		nbrs_left[10];
-	struct s_image		nbrs_right[10];
+	struct s_image		numbers[10];
 	struct s_player		player;
+        int can_exit;
 	int					keypresses;
 	int					score;
 	char				flags;

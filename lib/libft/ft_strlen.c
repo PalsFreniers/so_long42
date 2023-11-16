@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:07:00 by tdelage           #+#    #+#             */
-/*   Updated: 2023/10/31 13:07:01 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/15 20:28:48 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@ size_t	ft_strlen(const char *s)
 
 	ret = 0;
 	while (s[ret++])
+		;
+	return (ret - 1);
+}
+
+size_t ft_strlenc(const char *s, char c) {
+	int	ret;
+
+	ret = 0;
+	while (s[ret++] && s[ret] != c)
 		;
 	return (ret - 1);
 }

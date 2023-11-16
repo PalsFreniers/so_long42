@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:10:17 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/01 18:21:42 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/15 14:21:24 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (s2 == NULL)
 		return (ft_strdup(s1));
 	len_malloc = ft_strlen(s1) + ft_strlen(s2) + 1;
-	ret = ft_calloc(len_malloc, sizeof(char));
+	ret = (char *)ft_calloc(len_malloc, sizeof(char));
 	if (!ret)
 		return (NULL);
 	return (ft_strcat(ft_strcat(ret, (char *)s1), (char *)s2));

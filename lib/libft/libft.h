@@ -6,22 +6,31 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 12:11:06 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/12 14:58:35 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/15 20:26:09 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/**
+ * @file libft.h
+ * @brief Palsfreniers libft functions
+ */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
 # include <stddef.h>
 
-// PART 1
+/**
+ * @fn ft_isalpha
+ * @fn ft_isdigit
+ */
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
 int		ft_isascii(int c);
 int		ft_isprint(int c);
 size_t	ft_strlen(const char *s);
+size_t	ft_strlenc(const char *s, char c);
 void	*ft_memset(void *s, int c, size_t n);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
@@ -39,8 +48,6 @@ char	*ft_strnstr(const char *str, const char *sub, size_t n);
 int		ft_atoi(const char *str);
 char	*ft_strdup(const char *str);
 void	*ft_calloc(size_t nmemb, size_t size);
-
-// PART 2
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
@@ -53,5 +60,10 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *str, int fd);
 void	ft_putendl_fd(char *str, int fd);
 void	ft_putnbr_fd(int nb, int fd);
+void	ft_srand(unsigned int seed);
+int		ft_rand(int a, int b);
+void	ft_count(char *str, char c, size_t *of, size_t *ofnt);
+size_t	ft_countof(char *str, char c);
+size_t	ft_countofnot(char *str, char c);
 
 #endif // LIBFT_H

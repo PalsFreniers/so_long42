@@ -14,7 +14,7 @@ void	map_render(struct s_so_long *game, int x, int y)
 	else if (map[x + y * map_w] == MAP_COLLECTIBLE)
 		img.ctx = game->collectible.ctx;
 	else if (map[x + y * map_w] == MAP_EXIT)
-		img.ctx = game->exit.ctx;
+		img.ctx = game->exit.current.ctx;
 	else if (map[x + y * map_w] == MAP_EMPTY)
 		img.ctx = game->bg.ctx;
 	else if (map[x + y * map_w] == MAP_PLAYER)

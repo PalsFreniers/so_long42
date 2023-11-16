@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 11:06:20 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/06 22:34:15 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/15 14:21:03 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static char	**count_substr(char *str, char set, int *n)
 		i++;
 	}
 	*n = nb;
-	return (ft_calloc(nb + 1, sizeof(char *)));
+	return ((char **)ft_calloc(nb + 1, sizeof(char *)));
 }
 
 static void	*ft_free_split(char **split)
@@ -101,7 +101,7 @@ char	**ft_split(char const *str, char charset)
 		k = ft_strlen_delim((char *)str + off, charset);
 		(inb[0])[split] = ft_substr(str, off, k);
 		if ((inb[0])[split] == NULL)
-			return (ft_free_split(split));
+			return ((char **)ft_free_split(split));
 		off += get_next_tok((char *)str + off + k, charset, k, &(inb[0]));
 	}
 	(inb[0])[split] = NULL;

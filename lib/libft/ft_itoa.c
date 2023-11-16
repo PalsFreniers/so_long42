@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 05:43:32 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/03 06:11:10 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/15 14:19:41 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*ft_itoa(int n)
 	i += get_len(nd);
 	if (n == 0)
 		return (ft_strdup("0"));
-	ret = ft_calloc(i + 1, sizeof(char));
+	ret = (char *)ft_calloc(i + 1, sizeof(char));
 	if (!ret)
 		return (NULL);
 	if (sign)

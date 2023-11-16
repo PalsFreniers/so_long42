@@ -3,6 +3,7 @@ NAME = so_long
 SRCS =    srcs/so_long.c    	  \
 	  srcs/so_long_p2.c	  \
 	  srcs/render_map.c       \
+	  srcs/file_utils.c       \
 	  srcs/mlxw_ctx.c 	  \
 	  srcs/mlxw_hooks.c       \
 	  srcs/mlxw_colors.c      \
@@ -25,9 +26,9 @@ OBJS = $(SRCS:.c=.o)
 LIBS = -lft -lmlx -lXext -lX11 -lm -lz
 LIBPATH = -Llib
 INCLUDEPATH = -I./include
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
-LD = cc
+CC = clang-15
+CFLAGS = -g -ggdb -gdwarf-2 # -Wall -Wextra -Werror
+LD = clang-15
 LDFLAGS = $(LIBPATH) $(LIBS)
 
 all: $(NAME)
