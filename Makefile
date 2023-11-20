@@ -1,17 +1,18 @@
 NAME = so_long
 
-SRCS =    srcs/main.c             \
-	  srcs/sl_init.c          \
-	  srcs/so_long.c    	  \
-	  srcs/args.c             \
-	  srcs/render_map.c       \
-	  srcs/map_parsing.c      \
-	  srcs/file_utils.c       \
-	  srcs/mlxw_ctx.c 	  \
-	  srcs/mlxw_hooks.c       \
-	  srcs/mlxw_colors.c      \
-	  srcs/mlxw_images.c      \
-	  srcs/mlxw_struct_init.c \
+SRCS =    srcs/main.c              \
+	  srcs/sl_init.c           \
+	  srcs/so_long.c    	   \
+	  srcs/args.c              \
+	  srcs/render_map.c        \
+	  srcs/map_parsing.c       \
+	  srcs/map_parsing_utils.c \
+	  srcs/file_utils.c        \
+	  srcs/mlxw_ctx.c 	   \
+	  srcs/mlxw_hooks.c        \
+	  srcs/mlxw_colors.c       \
+	  srcs/mlxw_images.c       \
+	  srcs/mlxw_struct_init.c  \
 	  srcs/mlxw_struct_fini.c
 
 HEADERS = include/mlx.h         \
@@ -62,8 +63,8 @@ $(LIBMLX):
 clean:
 	make clean -C lib/libft
 	make clean -C lib/libmlx
-	rm -rf $(FT_HEADER)
-	rm -rf $(MLX_HEADERS)
+	rm -rf include/libft.h
+	rm -rf include/mlx.h include/mlx_int.h 
 	rm -rf $(OBJS)
 
 fclean: clean

@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 01:37:31 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/14 02:52:40 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/20 11:26:18 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ struct					s_image
 	int					y;
 };
 
-struct s_image			s_image_create_empty(struct s_mlx mlx, int width, int height);
+struct s_image			s_image_create_empty(struct s_mlx mlx, int width,
+							int height);
 struct s_image			s_image_create_xpm(struct s_mlx mlx, const char *path);
 void					s_image_destroy(struct s_mlx mlx, struct s_image img);
 void					mlxw_print_img(struct s_mlx mlx, struct s_image image);

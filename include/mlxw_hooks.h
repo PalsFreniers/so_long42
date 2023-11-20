@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 02:40:13 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/14 00:29:45 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/20 11:26:15 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,12 @@ enum			e_mouse_button
 
 enum			e_keycode
 {
-        K_SPACE = 32,
-        K_QUOTE = 39,
-        K_COMA = 44,
-        K_DOT = 46,
-        K_SLASH = 47,
-        K_SEMI_COLON = 59,
+	K_SPACE = 32,
+	K_QUOTE = 39,
+	K_COMA = 44,
+	K_DOT = 46,
+	K_SLASH = 47,
+	K_SEMI_COLON = 59,
 	K_A = 97,
 	K_B = 98,
 	K_C = 99,
@@ -128,7 +128,7 @@ enum			e_keycode
 	K_X = 120,
 	K_Y = 121,
 	K_Z = 122,
-        K_ESCAPE = 65307,
+	K_ESCAPE = 65307,
 	K_LEFT = 65361,
 	K_UP = 65362,
 	K_RIGHT = 65363,

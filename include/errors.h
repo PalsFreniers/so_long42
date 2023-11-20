@@ -6,14 +6,14 @@
 /*   By: tdelage <tdelage@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 21:14:33 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/20 07:46:32 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/20 11:22:11 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ERRORS_H
-#define ERRORS_H
+# define ERRORS_H
 
-enum					e_error_code
+enum	e_error_code
 {
 	FILE_NOT_FOUND = 1,
 	FILE_READ_ERROR = 2,
@@ -21,13 +21,13 @@ enum					e_error_code
 	TOO_FEW_ARGUMENTS = 4,
 	MALLOC_ERROR = 5,
 	BAD_MAP_EXTENTION = 6,
-        MAP_NOT_A_RECTANGLE = 7,
-        NO_COLLECTIBLES = 8,
-        ILLEGAL_CHARACTER = 9,
-        BAD_PLAYER_NUMBER = 10,
-        BAD_EXIT_NUMBER = 11,
+	MAP_NOT_A_RECTANGLE = 7,
+	NO_COLLECTIBLES = 8,
+	ILLEGAL_CHARACTER = 9,
+	BAD_PLAYER_NUMBER = 10,
+	BAD_EXIT_NUMBER = 11,
 };
 
-void					handle_error(int code);
+void	handle_error(int code);
 
 #endif // ERRORS_H
