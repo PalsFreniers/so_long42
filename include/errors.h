@@ -6,7 +6,7 @@
 /*   By: tdelage <tdelage@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 21:14:33 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/15 21:15:17 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/20 07:46:32 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ enum					e_error_code
 	MALLOC_ERROR = 5,
 	BAD_MAP_EXTENTION = 6,
         MAP_NOT_A_RECTANGLE = 7,
+        NO_COLLECTIBLES = 8,
+        ILLEGAL_CHARACTER = 9,
+        BAD_PLAYER_NUMBER = 10,
+        BAD_EXIT_NUMBER = 11,
 };
 
 void					handle_error(int code);

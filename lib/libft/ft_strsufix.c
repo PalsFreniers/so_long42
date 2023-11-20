@@ -11,11 +11,12 @@ int	ft_strsufix(char *s, char *sufix)
 	sulen = ft_strlen(sufix);
 	if (sulen > slen)
 		return (0);
-	while (--sulen >= 0)
+	while (sulen > 0)
 	{
-		--slen;
-		if (s[slen] != sufix[sulen])
+		if (s[slen - 1] != sufix[sulen - 1])
 			return (0);
+                slen--;
+                sulen--;
 	}
 	return (1);
 }

@@ -1,8 +1,11 @@
 NAME = so_long
 
-SRCS =    srcs/so_long.c    	  \
-	  srcs/so_long_p2.c	  \
+SRCS =    srcs/main.c             \
+	  srcs/sl_init.c          \
+	  srcs/so_long.c    	  \
+	  srcs/args.c             \
 	  srcs/render_map.c       \
+	  srcs/map_parsing.c      \
 	  srcs/file_utils.c       \
 	  srcs/mlxw_ctx.c 	  \
 	  srcs/mlxw_hooks.c       \
@@ -17,46 +20,65 @@ HEADERS = include/mlx.h         \
 	  include/mlxw_ctx.h    \
 	  include/mlxw_hooks.h  \
 	  include/mlxw_colors.h \
-	  include/mlxw_images.h
+	  include/mlxw_images.h \
+	  include/libft.h       \
+	  include/so_long.h     \
+	  include/errors.h      \
+	  include/file_utils.h  \
+	  include/map_parsing.h 
 
-FT_HEADER = include/libft.h
+LIBFT = lib/libft.a
 
 OBJS = $(SRCS:.c=.o)
 
 LIBS = -lft -lmlx -lXext -lX11 -lm -lz
 LIBPATH = -Llib
 INCLUDEPATH = -I./include
-CC = clang-15
-CFLAGS = -g -ggdb -gdwarf-2 # -Wall -Wextra -Werror
-LD = clang-15
+CC = gcc
+CFLAGS = -g -Wall -Wextra -Werror $(INCLUDEPATH)
+LD = gcc
 LDFLAGS = $(LIBPATH) $(LIBS)
+LIBMLX = lib/libmlx.a
 
 all: $(NAME)
 
-$(NAME): $(FT_HEADER) $(OBJS)
-	$(LD) -o $(NAME) $(OBJS) $(LDFLAGS)
+$(NAME): $(LIBFT) $(LIBMLX) $(OBJS)
+	@$(LD) -o $(NAME) $(OBJS) $(LDFLAGS)
+	@echo "so_long compilation finished !!!"
 
-$(FT_HEADER):
-	make -j 3 -C lib/libft
+$(LIBFT):
+	make -j 4 -C lib/libft
 	cp lib/libft/libft.a lib
 	cp lib/libft/libft.h include
 
+$(LIBMLX):
+	make -j 4 -C lib/libmlx
+	cp lib/libmlx/libmlx.a lib
+	cp lib/libmlx/mlx.h lib/libmlx/mlx_int.h include
+
 %.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDEPATH)
+	$(CC) $(CFLAGS) -o $@ -c $<
 
 clean:
 	make clean -C lib/libft
+	make clean -C lib/libmlx
 	rm -rf $(FT_HEADER)
+	rm -rf $(MLX_HEADERS)
 	rm -rf $(OBJS)
 
 fclean: clean
 	make fclean -C lib/libft
+	make fclean -C lib/libmlx
 	rm -rf lib/libft.a
+	rm -rf lib/libmlx.a
 	rm -rf $(NAME)
 
 re: fclean all
 
 run: re
-	./so_long
+	./$(NAME) maps/test.ber
+
+rdebug: re
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) maps/test2.ber
 
 .PHONY: all clean fclean re

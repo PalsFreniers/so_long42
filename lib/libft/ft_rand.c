@@ -6,13 +6,13 @@
 /*   By: tdelage <tdelage@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 23:47:12 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/15 19:41:11 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/16 12:31:53 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	gen_bit_shift_rng(int seed, int keys[5])
+static void	gen_bit_shift_rng(unsigned int seed, unsigned int keys[5])
 {
 	int	t1;
 	int	t2;
@@ -32,7 +32,7 @@ static unsigned int	ft_rrand(int init, unsigned int seed, unsigned int min,
 		unsigned int max)
 {
 	static unsigned int	m_seed;
-	int					key[5];
+	unsigned int		key[5];
 	int					range;
 
 	range = max - min + 1;

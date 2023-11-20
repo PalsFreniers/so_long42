@@ -6,15 +6,15 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 09:56:43 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/15 21:26:40 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/20 11:11:42 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
+# include "errors.h"
 # include "file_utils.h"
-#include "errors.h"
 # include "mlxw.h"
 
 # define CELL_SIZE 64
@@ -29,14 +29,20 @@
 # define FLAG_END_OF_GAME 0b00000010
 # define FLAG_ENEMY_MOVE 0b00000100
 # define FLAG_PAUSE 0b00001000
-
+# define FLAG_WON 0b00010000
 
 struct					s_map
 {
-	int					width;
-	int					height;
-        int col_nbr;
+	size_t				width;
+	size_t				height;
+	size_t				col_nbr;
 	char				*map;
+};
+
+struct					s_v2
+{
+	size_t				x;
+	size_t				y;
 };
 
 struct					s_player
@@ -44,14 +50,16 @@ struct					s_player
 	struct s_img_dat	ctx;
 	int					x;
 	int					y;
-	struct s_img_dat	frames[1];
+	int					left;
+	int					current_frame;
+	struct s_image		frames[6];
 };
 
-struct s_exit {
-        struct s_image current;
-        int x;
-        int y;
-        struct s_image frames[2];
+struct					s_exit
+{
+	struct s_image		current;
+	struct s_v2			pos;
+	struct s_image		frames[2];
 };
 
 struct					s_so_long
@@ -64,14 +72,30 @@ struct					s_so_long
 	struct s_image		collectible;
 	struct s_image		numbers[10];
 	struct s_player		player;
-        int can_exit;
-	int					keypresses;
-	int					score;
+	struct s_image		end_screen;
+	int					can_exit;
+	size_t				keypresses;
+	size_t				score;
+	int					ticks;
 	char				flags;
 };
 
-void					map_render(struct s_so_long *game, int x, int y);
+void					map_render(struct s_so_long *game, size_t x, size_t y);
 void					render_map(struct s_so_long *game);
-void					get_args(int c, char **v, struct s_so_long *game);
+char					*get_file(int c, char **v);
+char					*map_at(struct s_so_long *game, int x, int y);
+void					refresh_numbers(struct s_so_long *game);
+void					refresh_score(struct s_so_long *game);
+void					refresh_player_cells(struct s_so_long *game,
+							struct s_v2 a, struct s_v2 b);
+void					map_parse(struct s_so_long *game, char *filePath);
+int						key_pressed(int code, struct s_so_long *game);
+void					so_long_unleak(struct s_so_long game);
+int						f_loop(struct s_so_long *game);
+void					init_game(struct s_so_long *game);
+void					player_add(struct s_so_long *game, int *player,
+							struct s_v2 pos);
+void					exit_add(struct s_so_long *game, int *exit,
+							struct s_v2 pos);
 
 #endif // SO_LONG_H

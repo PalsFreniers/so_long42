@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   map_parsing_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/31 13:07:00 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/20 09:07:54 by tdelage          ###   ########.fr       */
+/*   Created: 2023/11/20 11:08:19 by tdelage           #+#    #+#             */
+/*   Updated: 2023/11/20 11:11:13 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/so_long.h"
 
-size_t	ft_strlen(const char *s)
+void	player_add(struct s_so_long *game, int *player, struct s_v2 pos)
 {
-	int	ret;
-
-	ret = 0;
-	while (s[ret++])
-		;
-	return (ret - 1);
+	game->player.x = pos.x;
+	game->player.y = pos.y;
+	(*player)++;
 }
 
-size_t ft_strlenc(const char *s, char c) {
-	int	ret;
-
-	ret = 0;
-	while (s[ret] && s[ret++] != c)
-		;
-	return (ret - 1);
+void	exit_add(struct s_so_long *game, int *exit, struct s_v2 pos)
+{
+	game->exit.pos = pos;
+	(*exit)++;
 }
