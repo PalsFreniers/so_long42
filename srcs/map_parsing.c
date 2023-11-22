@@ -6,7 +6,7 @@
 /*   By: tdelage <tdelage@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:08:37 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/20 11:11:49 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/22 10:45:24 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,12 @@ int	check_map_init(char *f, struct s_so_long *game)
 	player = 0;
 	exit = 0;
 	game->map.map = (char *)ft_calloc(game->map.width * game->map.height + 1,
-			sizeof(char));
+		sizeof(char));
 	if (!game->map.map)
 		handle_error(MALLOC_ERROR);
 	map_copy(game, f);
 	free(f);
+        check_borders(game);
 	if (check_map_impl(&nbcol, &player, &exit, game) == -1)
 		map_error(game, ILLEGAL_CHARACTER);
 	else if (nbcol == 0)
@@ -102,7 +103,7 @@ void	map_parse(struct s_so_long *game, char *filePath)
 	ft_count(f, '\n', &lines, &size);
 	game->map.width = ft_strlenc(f, '\n');
 	game->map.height = lines + 1;
-	if (size / game->map.height != game->map.width)
+	if (size != game->map.height * game->map.width)
 	{
 		free(f);
 		handle_error(MAP_NOT_A_RECTANGLE);

@@ -31,14 +31,17 @@ $(OBJ_DIR)/%.o: %.c
 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 $(NAME)	: $(OBJ)
-	@ar -r $(NAME) $(OBJ)
+	@ar -rcs $(NAME) $(OBJ)
 	@ranlib $(NAME)
+	@echo "mlx compiled !!"
 
 clean:
-	rm -rf $(OBJ_DIR)/
+	@rm -rf $(OBJ_DIR)/
+	@echo "mlx clean"
 
 fclean: clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
+	@echo "mlx fclean"
 
 re: fclean all
 

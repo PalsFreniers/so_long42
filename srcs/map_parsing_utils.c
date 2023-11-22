@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 11:08:19 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/20 11:11:13 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/22 09:56:44 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,47 @@ void	exit_add(struct s_so_long *game, int *exit, struct s_v2 pos)
 {
 	game->exit.pos = pos;
 	(*exit)++;
+}
+
+void	check_borders_part1(struct s_so_long *game)
+{
+	struct s_v2	pos;
+
+	pos.x = 0;
+	pos.y = 0;
+	while (pos.y < game->map.height)
+	{
+		if (*map_at(game, pos.x, pos.y) != '1')
+			map_error(game, BORDER_ERROR);
+		pos.y++;
+	}
+        pos.y--;
+	while (pos.x < game->map.width)
+	{
+		if (*map_at(game, pos.x, pos.y) != '1')
+			map_error(game, BORDER_ERROR);
+		pos.x++;
+	}
+}
+
+void	check_borders(struct s_so_long *game)
+{
+	struct s_v2	pos;
+
+	check_borders_part1(game);
+	pos.x = 0;
+	pos.y = 0;
+	while (pos.x < game->map.width)
+	{
+		if (*map_at(game, pos.x, pos.y) != '1')
+			map_error(game, BORDER_ERROR);
+		pos.x++;
+	}
+        pos.x--;
+	while (pos.y < game->map.height)
+	{
+		if (*map_at(game, pos.x, pos.y) != '1')
+			map_error(game, BORDER_ERROR);
+		pos.y++;
+	}
 }

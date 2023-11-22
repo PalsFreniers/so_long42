@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 09:56:43 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/20 11:26:21 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/22 10:48:34 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,8 @@ void					player_add(struct s_so_long *game, int *player,
 							struct s_v2 pos);
 void					exit_add(struct s_so_long *game, int *exit,
 							struct s_v2 pos);
+void					map_error(struct s_so_long *game, int code);
+void					check_borders(struct s_so_long *game);
+void					flood_fill_check(struct s_so_long *game);
 
 #endif // SO_LONG_H
