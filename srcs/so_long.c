@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 05:13:41 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/20 11:06:28 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/24 09:14:25 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,33 +21,6 @@ char	*map_at(struct s_so_long *game, int x, int y)
 	map = game->map;
 	width = map.width;
 	return (&(map.map[x + y * width]));
-}
-
-void	player_move(struct s_so_long *game, int x, int y)
-{
-	size_t	xt;
-	size_t	yt;
-
-	xt = game->player.x;
-	yt = game->player.y;
-	if (xt + x < 1 || xt + x >= game->map.width - 1 || yt + y < 1 || yt
-		+ y >= game->map.height - 1)
-		return ;
-	if (*map_at(game, xt + x, yt + y) == MAP_WALL)
-		return ;
-	if (*map_at(game, xt + x, yt + y) == MAP_EXIT)
-	{
-		if (game->can_exit)
-			game->flags |= FLAG_END_OF_GAME;
-		return ;
-	}
-	if (*map_at(game, xt + x, yt + y) == MAP_COLLECTIBLE)
-	{
-		game->score++;
-		refresh_score(game);
-	}
-	refresh_player_cells(game, (struct s_v2){x, y}, (struct s_v2){xt, yt});
-	refresh_numbers(game);
 }
 
 int	key_pressed(int code, struct s_so_long *game)
@@ -75,6 +48,32 @@ int	key_pressed(int code, struct s_so_long *game)
 	return (1);
 }
 
+void	f_loop_enemy(struct s_so_long *game)
+{
+	int	i;
+
+	if (!(game->flags & FLAG_PAUSE) && game->ticks % 6000 == 0)
+	{
+		game->enemy.current_frame++;
+		if (game->enemy.current_frame == 6)
+			game->enemy.current_frame = 0;
+		game->enemy.ctx = game->enemy.frames[game->enemy.current_frame].ctx;
+		i = 0;
+		while (i < game->enemy.nb)
+		{
+			map_render(game, game->enemy.poss[i].x, game->enemy.poss[i].y);
+			i++;
+		}
+	}
+	if (game->flags & FLAG_KILLED)
+	{
+		game->flags &= ~FLAG_KILLED;
+		game->flags |= FLAG_PAUSE;
+                game->flags |= FLAG_WON;
+		mlxw_print_img(game->mlx, game->killed_screen);
+	}
+}
+
 int	f_loop(struct s_so_long *game)
 {
 	if (!game->can_exit && game->score == game->map.col_nbr)
@@ -97,8 +96,9 @@ int	f_loop(struct s_so_long *game)
 		if (game->player.current_frame == 3)
 			game->player.current_frame = 0;
 		game->player.ctx = game->player.frames[game->player.current_frame + (3
-				* game->player.left)].ctx;
+			* game->player.left)].ctx;
 		map_render(game, game->player.x, game->player.y);
 	}
+	f_loop_enemy(game);
 	return (1);
 }

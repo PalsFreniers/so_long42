@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 10:36:23 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/20 11:04:57 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/24 09:27:28 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,32 @@
 void	init_player(struct s_so_long *game)
 {
 	game->player.frames[0] = s_image_create_xpm(game->mlx,
-			"textures/plyerL0.xpm");
+		"textures/plyerL0.xpm");
 	game->player.frames[1] = s_image_create_xpm(game->mlx,
-			"textures/plyerL1.xpm");
+		"textures/plyerL1.xpm");
 	game->player.frames[2] = s_image_create_xpm(game->mlx,
-			"textures/plyerL2.xpm");
+		"textures/plyerL2.xpm");
 	game->player.frames[3] = s_image_create_xpm(game->mlx,
-			"textures/plyerR0.xpm");
+		"textures/plyerR0.xpm");
 	game->player.frames[4] = s_image_create_xpm(game->mlx,
-			"textures/plyerR1.xpm");
+		"textures/plyerR1.xpm");
 	game->player.frames[5] = s_image_create_xpm(game->mlx,
-			"textures/plyerR2.xpm");
+		"textures/plyerR2.xpm");
 	game->player.left = 0;
 	game->player.ctx = game->player.frames[0].ctx;
 	game->player.current_frame = 0;
+}
+
+void	init_enemy(struct s_so_long *game)
+{
+	game->enemy.frames[0] = s_image_create_xpm(game->mlx, "textures/E0.xpm");
+	game->enemy.frames[1] = s_image_create_xpm(game->mlx, "textures/E1.xpm");
+	game->enemy.frames[2] = s_image_create_xpm(game->mlx, "textures/E2.xpm");
+	game->enemy.frames[3] = s_image_create_xpm(game->mlx, "textures/E3.xpm");
+	game->enemy.frames[4] = s_image_create_xpm(game->mlx, "textures/E4.xpm");
+	game->enemy.frames[5] = s_image_create_xpm(game->mlx, "textures/E5.xpm");
+	game->enemy.ctx = game->enemy.frames[0].ctx;
+	game->enemy.current_frame = 0;
 }
 
 void	init_nbrs(struct s_so_long *game)
@@ -58,41 +70,17 @@ void	init_game(struct s_so_long *game)
 	init_nbrs(game);
 	init_player(game);
 	game->end_screen = s_image_create_xpm(game->mlx, "textures/win_screen.xpm");
+	game->killed_screen = s_image_create_xpm(game->mlx,
+		"textures/death_screen.xpm");
 	game->bg = s_image_create_xpm(game->mlx, "textures/background.xpm");
 	game->collectible = s_image_create_xpm(game->mlx, "textures/food.xpm");
 	game->wall = s_image_create_xpm(game->mlx, "textures/wall.xpm");
 	game->exit.frames[1] = s_image_create_xpm(game->mlx,
-			"textures/trap_open.xpm");
+		"textures/trap_open.xpm");
 	game->exit.frames[0] = s_image_create_xpm(game->mlx,
-			"textures/trap_clse.xpm");
+		"textures/trap_clse.xpm");
 	game->exit.current = game->exit.frames[0];
 	game->end_screen.x = ((game->map.width * CELL_SIZE) / 2) - 96;
 	game->end_screen.y = ((game->map.height * CELL_SIZE) / 2) - 96;
-}
-
-void	so_long_unleak(struct s_so_long game)
-{
-	int	i;
-
-	s_image_destroy(game.mlx, game.bg);
-	i = 0;
-	while (i < 6)
-	{
-		s_image_destroy(game.mlx, game.player.frames[i]);
-		i++;
-	}
-	s_image_destroy(game.mlx, game.collectible);
-	s_image_destroy(game.mlx, game.wall);
-	s_image_destroy(game.mlx, game.exit.frames[0]);
-	s_image_destroy(game.mlx, game.exit.frames[1]);
-	s_image_destroy(game.mlx, game.end_screen);
-	i = 0;
-	while (i < 10)
-	{
-		s_image_destroy(game.mlx, game.numbers[i]);
-		i++;
-	}
-	mlxw_destroy_window(game.mlx);
-	mlxw_destroy_context(game.mlx);
-	free(game.map.map);
+	init_enemy(game);
 }

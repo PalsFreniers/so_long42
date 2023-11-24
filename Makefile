@@ -2,7 +2,9 @@ NAME = so_long
 
 SRCS =    srcs/main.c              \
 	  srcs/sl_init.c           \
+	  srcs/sl_fini.c           \
 	  srcs/so_long.c    	   \
+	  srcs/player.c    	   \
 	  srcs/args.c              \
 	  srcs/render_map.c        \
 	  srcs/errors.c            \
