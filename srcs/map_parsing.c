@@ -6,7 +6,7 @@
 /*   By: tdelage <tdelage@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:08:37 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/22 10:45:24 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/22 16:52:31 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	check_map_impl(int *nbcol, int *player, int *exit, struct s_so_long *game)
 
 void	map_error(struct s_so_long *game, int code)
 {
-	free(game->map.map);
+	if (game->map.map)
+		free(game->map.map);
 	handle_error(code);
 }
 
@@ -69,12 +70,12 @@ int	check_map_init(char *f, struct s_so_long *game)
 	player = 0;
 	exit = 0;
 	game->map.map = (char *)ft_calloc(game->map.width * game->map.height + 1,
-		sizeof(char));
+			sizeof(char));
 	if (!game->map.map)
 		handle_error(MALLOC_ERROR);
 	map_copy(game, f);
 	free(f);
-        check_borders(game);
+	check_borders(game);
 	if (check_map_impl(&nbcol, &player, &exit, game) == -1)
 		map_error(game, ILLEGAL_CHARACTER);
 	else if (nbcol == 0)

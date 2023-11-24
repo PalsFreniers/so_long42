@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 05:13:41 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/24 09:14:25 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/24 14:07:25 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	f_loop(struct s_so_long *game)
 		mlxw_print_img(game->mlx, game->end_screen);
 	}
 	game->ticks++;
-	if (!(game->flags & FLAG_PAUSE) && game->ticks % 9000 == 0)
+	if (!(game->flags & FLAG_PAUSE) && game->ticks % 8500 == 0)
 	{
 		game->player.current_frame++;
 		if (game->player.current_frame == 3)

@@ -6,7 +6,7 @@
 /*   By: tdelage <tdelage@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 23:47:12 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/16 12:31:53 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/22 18:53:07 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ static unsigned int	ft_rrand(int init, unsigned int seed, unsigned int min,
 
 void	ft_srand(unsigned int seed)
 {
+	if (seed == 0)
+		seed = 1;
 	ft_rrand(1, seed, 0, 0);
 }
 

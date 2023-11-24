@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 10:35:20 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/24 08:23:46 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/24 14:07:04 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int c, char **v)
 	struct s_so_long	game;
 
 	map_parse(&game, get_file(c, v));
-	flood_fill_check(&game);
+	ff_check(&game);
 	init_game(&game);
         *map_at(&game, 2, 2) = MAP_ENEMY;
         struct s_v2 pos = {2, 2};

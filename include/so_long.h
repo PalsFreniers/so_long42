@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 09:56:43 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/24 09:25:52 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/24 14:06:44 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,13 @@ struct					s_map
 	size_t				height;
 	size_t				col_nbr;
 	char				*map;
+};
+
+struct		s_flood_fill
+{
+	char	*cache;
+	size_t		score;
+	int		exit;
 };
 
 struct					s_v2
@@ -78,7 +85,7 @@ struct					s_so_long
 	struct s_mlx		mlx;
 	struct s_map		map;
 	struct s_image		bg;
-	struct s_image		wall;
+	struct s_image		wall[4];
 	struct s_exit		exit;
 	struct s_image		collectible;
 	struct s_image		numbers[10];
@@ -113,6 +120,6 @@ void					exit_add(struct s_so_long *game, int *exit,
 							struct s_v2 pos);
 void					map_error(struct s_so_long *game, int code);
 void					check_borders(struct s_so_long *game);
-void					flood_fill_check(struct s_so_long *game);
+void					ff_check(struct s_so_long *game);
 
 #endif // SO_LONG_H
