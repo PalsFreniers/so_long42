@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 09:56:43 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/24 14:06:44 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/24 19:45:37 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ struct					s_map
 	char				*map;
 };
 
-struct		s_flood_fill
+struct					s_flood_fill
 {
-	char	*cache;
-	size_t		score;
-	int		exit;
+	char				*cache;
+	size_t				score;
+	int					exit;
 };
 
 struct					s_v2
@@ -93,6 +93,7 @@ struct					s_so_long
 	struct s_enemy		enemy;
 	struct s_image		end_screen;
 	struct s_image		killed_screen;
+        int *e_cache;
 	int					can_exit;
 	size_t				keypresses;
 	size_t				score;
@@ -121,5 +122,6 @@ void					exit_add(struct s_so_long *game, int *exit,
 void					map_error(struct s_so_long *game, int code);
 void					check_borders(struct s_so_long *game);
 void					ff_check(struct s_so_long *game);
+void					init_enemies(struct s_so_long *game);
 
 #endif // SO_LONG_H

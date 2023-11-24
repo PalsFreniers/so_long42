@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 10:36:23 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/24 14:07:20 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/24 14:14:01 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,16 @@ void	init_nbrs(struct s_so_long *game)
 	game->numbers[9] = s_image_create_xpm(game->mlx, "textures/9.xpm");
 }
 
-void	init_walls(struct s_so_long *game)
+void	init_walls_end_pos(struct s_so_long *game)
 {
 	game->wall[0] = s_image_create_xpm(game->mlx, "textures/wall0.xpm");
 	game->wall[1] = s_image_create_xpm(game->mlx, "textures/wall1.xpm");
 	game->wall[2] = s_image_create_xpm(game->mlx, "textures/wall2.xpm");
 	game->wall[3] = s_image_create_xpm(game->mlx, "textures/wall3.xpm");
+	game->end_screen.x = ((game->map.width * CELL_SIZE) / 2) - 96;
+	game->end_screen.y = ((game->map.height * CELL_SIZE) / 2) - 96;
+        game->killed_screen.x = game->end_screen.x;
+        game->killed_screen.y = game->end_screen.y;
 }
 
 void	init_game(struct s_so_long *game)
@@ -77,7 +81,6 @@ void	init_game(struct s_so_long *game)
 			CELL_SIZE * game->map.height, "So Long"));
 	init_nbrs(game);
 	init_player(game);
-    init_walls(game);
 	game->end_screen = s_image_create_xpm(game->mlx, "textures/win_screen.xpm");
 	game->killed_screen = s_image_create_xpm(game->mlx,
 		"textures/death_screen.xpm");
@@ -88,33 +91,6 @@ void	init_game(struct s_so_long *game)
 	game->exit.frames[0] = s_image_create_xpm(game->mlx,
 		"textures/trap_clse.xpm");
 	game->exit.current = game->exit.frames[0];
-	game->end_screen.x = ((game->map.width * CELL_SIZE) / 2) - 96;
-	game->end_screen.y = ((game->map.height * CELL_SIZE) / 2) - 96;
-<<<<<<< HEAD
+        init_walls_end_pos(game);
 	init_enemy(game);
-=======
-}
-
-void	so_long_unleak(struct s_so_long game)
-{
-	int	i;
-
-	s_image_destroy(game.mlx, game.bg);
-	i = 0;
-	while (i < 6)
-		s_image_destroy(game.mlx, game.player.frames[i++]);
-	s_image_destroy(game.mlx, game.collectible);
-	i = 0;
-	while (i < 4)
-		s_image_destroy(game.mlx, game.wall[i++]);
-	s_image_destroy(game.mlx, game.exit.frames[0]);
-	s_image_destroy(game.mlx, game.exit.frames[1]);
-	s_image_destroy(game.mlx, game.end_screen);
-	i = 0;
-	while (i < 10)
-		s_image_destroy(game.mlx, game.numbers[i++]);
-	mlxw_destroy_window(game.mlx);
-	mlxw_destroy_context(game.mlx);
-	free(game.map.map);
->>>>>>> f9b9292 (adding ff)
 }
