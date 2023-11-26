@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 10:35:20 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/24 19:45:20 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/26 08:03:19 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ int	main(int c, char **v)
 
 	map_parse(&game, get_file(c, v));
 	ff_check(&game);
-        init_enemies(&game);
+	init_enemies(&game);
 	init_game(&game);
+	gen_weightmap(&game);
 	s_hook_register(game.mlx, s_hook_create(E_DESTROY_NOTIFY, M_NONE,
 			mlx_loop_end, game.mlx.ctx));
 	s_hook_register(game.mlx, s_hook_create(E_KEY_PRESSED, M_KEY_PRESSED,

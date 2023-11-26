@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 11:08:19 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/22 09:56:44 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/26 08:03:46 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	check_borders_part1(struct s_so_long *game)
 			map_error(game, BORDER_ERROR);
 		pos.y++;
 	}
-        pos.y--;
+	pos.y--;
 	while (pos.x < game->map.width)
 	{
 		if (*map_at(game, pos.x, pos.y) != '1')
@@ -59,7 +59,7 @@ void	check_borders(struct s_so_long *game)
 			map_error(game, BORDER_ERROR);
 		pos.x++;
 	}
-        pos.x--;
+	pos.x--;
 	while (pos.y < game->map.height)
 	{
 		if (*map_at(game, pos.x, pos.y) != '1')

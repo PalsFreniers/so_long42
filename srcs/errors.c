@@ -6,7 +6,7 @@
 /*   By: tdelage <tdelage@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 10:36:36 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/22 18:49:31 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/26 08:03:00 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	handle_error_part2(int code)
 {
 	if (code == BORDER_ERROR)
 		write(2, "[ERROR] -> error in map_borders\n", 32);
-        else if (code == UNREACHABLE_EXIT)
+	else if (code == UNREACHABLE_EXIT)
 		write(2, "[ERROR] -> unreachable exit\n", 28);
-        else if (code == UNREACHABLE_COLLECTIBLE)
+	else if (code == UNREACHABLE_COLLECTIBLE)
 		write(2, "[ERROR] -> unreachable collectibles\n", 36);
 	else
 		write(2, "[ERROR] -> unhandled error\n", 27);

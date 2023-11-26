@@ -6,12 +6,13 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 05:13:41 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/24 14:07:25 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/26 08:16:14 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/file_utils.h"
 #include "../include/so_long.h"
+#include <stdio.h>
 
 char	*map_at(struct s_so_long *game, int x, int y)
 {
@@ -48,6 +49,26 @@ int	key_pressed(int code, struct s_so_long *game)
 	return (1);
 }
 
+void	f_loop_enemy_move(struct s_so_long *game)
+{
+	int	i;
+
+	if (!(game->flags & FLAG_PAUSE))
+	{
+		if (game->ticks % 55000 == 0 && game->ticks != 0)
+		{
+			gen_weightmap(game);
+			i = 0;
+			while (i < game->enemy.nb)
+			{
+				enemy_move(game, i, getp_less_around(game,
+						game->enemy.poss[i]));
+				i++;
+			}
+		}
+	}
+}
+
 void	f_loop_enemy(struct s_so_long *game)
 {
 	int	i;
@@ -65,11 +86,12 @@ void	f_loop_enemy(struct s_so_long *game)
 			i++;
 		}
 	}
+	f_loop_enemy_move(game);
 	if (game->flags & FLAG_KILLED)
 	{
 		game->flags &= ~FLAG_KILLED;
 		game->flags |= FLAG_PAUSE;
-                game->flags |= FLAG_WON;
+		game->flags |= FLAG_WON;
 		mlxw_print_img(game->mlx, game->killed_screen);
 	}
 }
@@ -96,7 +118,7 @@ int	f_loop(struct s_so_long *game)
 		if (game->player.current_frame == 3)
 			game->player.current_frame = 0;
 		game->player.ctx = game->player.frames[game->player.current_frame + (3
-			* game->player.left)].ctx;
+				* game->player.left)].ctx;
 		map_render(game, game->player.x, game->player.y);
 	}
 	f_loop_enemy(game);

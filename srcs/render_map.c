@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 11:21:22 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/24 14:07:11 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/26 08:04:01 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	map_render(struct s_so_long *game, size_t x, size_t y)
 		img.ctx = game->bg.ctx;
 	else if (map[x + y * map_w] == MAP_PLAYER)
 		img.ctx = game->player.ctx;
-        else if (map[x + y * map_w] == MAP_ENEMY)
-                img.ctx = game->enemy.ctx;
+	else if (map[x + y * map_w] == MAP_ENEMY)
+		img.ctx = game->enemy.ctx;
 	else
 		return ;
 	img.x = x * CELL_SIZE;

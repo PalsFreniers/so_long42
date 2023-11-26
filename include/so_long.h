@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 09:56:43 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/24 19:45:37 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/26 08:05:17 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ struct					s_enemy
 	struct s_img_dat	ctx;
 	struct s_v2			*poss;
 	struct s_image		frames[6];
+	int					*has_col;
+	int					*wm;
 	int					nb;
 	int					current_frame;
 };
@@ -93,7 +95,7 @@ struct					s_so_long
 	struct s_enemy		enemy;
 	struct s_image		end_screen;
 	struct s_image		killed_screen;
-        int *e_cache;
+	int					*e_cache;
 	int					can_exit;
 	size_t				keypresses;
 	size_t				score;
@@ -123,5 +125,18 @@ void					map_error(struct s_so_long *game, int code);
 void					check_borders(struct s_so_long *game);
 void					ff_check(struct s_so_long *game);
 void					init_enemies(struct s_so_long *game);
+void					gen_weightmap(struct s_so_long *game);
+int						supra_min(unsigned int a, unsigned int b,
+							unsigned int c, unsigned int d);
+struct s_v2				getp_less_around(struct s_so_long *game,
+							struct s_v2 pos);
+int						get_less_around(struct s_so_long *game,
+							struct s_v2 pos);
+void					enemy_move(struct s_so_long *game, int i,
+							struct s_v2 pos);
+void					ff_gen_wm(struct s_so_long *game, struct s_v2 pos,
+							int prec);
+void					launch_batch(struct s_so_long *game, struct s_v2 pos,
+							int less);
 
 #endif // SO_LONG_H

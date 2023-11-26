@@ -6,6 +6,7 @@ SRCS =    srcs/main.c              \
 	  srcs/so_long.c    	   \
 	  srcs/player.c    	   \
 	  srcs/enemy.c    	   \
+	  srcs/enemy_2.c    	   \
 	  srcs/args.c              \
 	  srcs/render_map.c        \
 	  srcs/errors.c            \

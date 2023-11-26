@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 11:21:47 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/22 10:42:48 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/26 08:03:06 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*slurp(char *path)
 	while (ret != 0)
 	{
 		ret = read(fd, buf, SLURP_BUF_SIZE - 1);
-                buf[ret] = 0;
+		buf[ret] = 0;
 		if (ret == 0)
 			return (file);
 		slurp_read_error(file, fd);

@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 15:49:31 by tdelage           #+#    #+#             */
-/*   Updated: 2023/11/22 10:32:39 by tdelage          ###   ########.fr       */
+/*   Updated: 2023/11/26 08:05:51 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,6 @@ char	*ft_strtrim(char const *s1, char const *set)
 	if (!ns)
 		return (NULL);
 	ft_memcpy(ns, s1 + start, new_len);
-        ns[new_len] = 0;
+	ns[new_len] = 0;
 	return (ns);
 }
