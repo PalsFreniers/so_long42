@@ -16,7 +16,11 @@
 
 void	handle_error_part2(int code)
 {
-	if (code == BORDER_ERROR)
+	if (code == BAD_PLAYER_NUMBER)
+		write(2, "[ERROR] -> bad player number\n", 29);
+	else if (code == BAD_EXIT_NUMBER)
+		write(2, "[ERROR] -> bad exit number\n", 27);
+	else if (code == BORDER_ERROR)
 		write(2, "[ERROR] -> error in map_borders\n", 32);
 	else if (code == UNREACHABLE_EXIT)
 		write(2, "[ERROR] -> unreachable exit\n", 28);
@@ -28,6 +32,7 @@ void	handle_error_part2(int code)
 
 void	handle_error(int code)
 {
+	write(2, "Error\n", 6);
 	if (code == FILE_NOT_FOUND)
 		write(2, "[ERROR] -> unable to find file\n", 31);
 	else if (code == FILE_READ_ERROR)
@@ -46,10 +51,6 @@ void	handle_error(int code)
 		write(2, "[ERROR] -> the map does not have collectibles\n", 46);
 	else if (code == ILLEGAL_CHARACTER)
 		write(2, "[ERROR] -> illegal character in map\n", 36);
-	else if (code == BAD_PLAYER_NUMBER)
-		write(2, "[ERROR] -> bad player number\n", 29);
-	else if (code == BAD_EXIT_NUMBER)
-		write(2, "[ERROR] -> bad exit number\n", 27);
 	else
 		handle_error_part2(code);
 	exit(code);
